@@ -1,0 +1,93 @@
+D:\University\Internship\1st Internship\phishing_url_detector_1\phishing_url_detector\.venv\Lib\site-packages\sklearn\svm\_base.py:239: FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
+  warnings.warn(
+D:\University\Internship\1st Internship\phishing_url_detector_1\phishing_url_detector\.venv\Lib\site-packages\sklearn\svm\_base.py:239: FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
+  warnings.warn(
+D:\University\Internship\1st Internship\phishing_url_detector_1\phishing_url_detector\.venv\Lib\site-packages\sklearn\svm\_base.py:239: FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
+  warnings.warn(
+D:\University\Internship\1st Internship\phishing_url_detector_1\phishing_url_detector\.venv\Lib\site-packages\sklearn\svm\_base.py:239: FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
+  warnings.warn(
+Total examples: 463893  (legitimate=397407, phishing=66486)
+
+============================================================
+RandomForest
+============================================================
+              precision    recall  f1-score   support
+
+    Phishing       0.67      0.85      0.75     13297
+  Legitimate       0.97      0.93      0.95     79482
+
+    accuracy                           0.92     92779
+   macro avg       0.82      0.89      0.85     92779
+weighted avg       0.93      0.92      0.92     92779
+
+Confusion matrix ([[TN, FP], [FN, TP]] for Phishing=0, Legitimate=1):
+[[11258  2039]
+ [ 5486 73996]]
+ROC-AUC: 0.9603
+3-fold CV accuracy: 0.9166 (+/- 0.0008)
+
+============================================================
+XGBoost
+============================================================
+              precision    recall  f1-score   support
+
+    Phishing       0.55      0.87      0.67     13297
+  Legitimate       0.98      0.88      0.93     79482
+
+    accuracy                           0.88     92779
+   macro avg       0.76      0.87      0.80     92779
+weighted avg       0.91      0.88      0.89     92779
+
+Confusion matrix ([[TN, FP], [FN, TP]] for Phishing=0, Legitimate=1):
+[[11536  1761]
+ [ 9522 69960]]
+ROC-AUC: 0.9471
+3-fold CV accuracy: 0.8764 (+/- 0.0009)
+
+============================================================
+LightGBM
+============================================================
+              precision    recall  f1-score   support
+
+    Phishing       0.56      0.87      0.68     13297
+  Legitimate       0.98      0.88      0.93     79482
+
+    accuracy                           0.88     92779
+   macro avg       0.77      0.88      0.80     92779
+weighted avg       0.92      0.88      0.89     92779
+
+Confusion matrix ([[TN, FP], [FN, TP]] for Phishing=0, Legitimate=1):
+[[11577  1720]
+ [ 9202 70280]]
+ROC-AUC: 0.9498
+3-fold CV accuracy: 0.8810 (+/- 0.0015)
+
+============================================================
+SVM
+============================================================
+(SVM trained/cross-validated on a stratified subsample of 15000 rows - full data is impractical for kernel SVM. Still evaluated on the full 92779-row test set.)
+              precision    recall  f1-score   support
+
+    Phishing       0.46      0.83      0.59     13297
+  Legitimate       0.97      0.84      0.90     79482
+
+    accuracy                           0.84     92779
+   macro avg       0.71      0.83      0.75     92779
+weighted avg       0.89      0.84      0.85     92779
+
+Confusion matrix ([[TN, FP], [FN, TP]] for Phishing=0, Legitimate=1):
+[[11044  2253]
+ [12903 66579]]
+ROC-AUC: 0.8986
+3-fold CV accuracy: 0.8247 (+/- 0.0044)
+
+============================================================
+Summary (sorted by ROC-AUC)
+============================================================
+       Model  Accuracy  Phish Precision  Phish Recall  Phish F1  ROC-AUC  CV Accuracy
+RandomForest    0.9189           0.6724        0.8467    0.7495   0.9603       0.9166
+    LightGBM    0.8823           0.5571        0.8706    0.6795   0.9498       0.8810
+     XGBoost    0.8784           0.5478        0.8676    0.6716   0.9471       0.8764
+         SVM    0.8366           0.4612        0.8306    0.5931   0.8986       0.8247
+
+Saved ROC curve plot to roc_curves.png

@@ -1,0 +1,13 @@
+done: max_depth=None
+done: max_depth=10
+done: max_depth=15
+done: max_depth=20
+done: max_depth=30
+
+==========================================================================================
+      max_depth  Accuracy  Phish Precision  Phish Recall  Phish F1  Avg tree depth  Total nodes (all trees)  Train time (s)
+None (uncapped)    0.9189           0.6724        0.8467    0.7495         42.9600                  9900012         38.6000
+             10    0.8190           0.4336        0.8576    0.5760         10.0000                   238250         25.5000
+             15    0.8620           0.5110        0.8694    0.6436         15.0000                  1221776         30.5000
+             20    0.8911           0.5798        0.8713    0.6963         20.0000                  3462346         33.8000
+             30    0.9171           0.6638        0.8546    0.7472         30.0000                  8791268         35.9000

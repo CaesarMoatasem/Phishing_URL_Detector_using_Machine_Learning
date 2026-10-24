@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URL Threat Scanner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="console">
+  <div class="console__eyebrow">URL THREAT SCANNER</div>
+  <h1>Paste a link. We'll scan it for phishing signals.</h1>
+  <p class="subhead">Runs entirely on lexical URL analysis — no page is ever loaded or visited.</p>
+
+  <form method="POST" class="scan-form" id="scanForm">
+    <div class="input-wrap" id="inputWrap">
+      <span class="prompt">&gt;</span>
+      <input
+        type="text"
+        name="url"
+        id="urlInput"
+        placeholder="https://example.com/login"
+        value="{{ result.url if result else '' }}"
+        autocomplete="off"
+        spellcheck="false"
+        required>
+      <div class="scan-line" id="scanLine"></div>
+    </div>
+    <button type="submit" id="scanBtn">Scan URL</button>
+  </form>
+
+  {% if result %}
+  <div class="verdict verdict--{{ 'safe' if result.is_legit else 'danger' }}">
+    <div class="verdict__row">
+      <span class="verdict__dot"></span>
+      <span class="verdict__label">{{ 'CLEAR' if result.is_legit else 'THREAT DETECTED' }}</span>
+      <span class="verdict__confidence">{{ result.confidence }}% confidence</span>
+    </div>
+    <div class="verdict__title">{{ result.verdict }}</div>
+
+    {% if result.red_flags %}
+    <div class="flags">
+      <div class="flags__title">Flagged signals</div>
+      <ul>
+      {% for flag in result.red_flags %}
+        <li>{{ flag }}</li>
+      {% endfor %}
+      </ul>
+    </div>
+    {% else %}
+    <div class="flags flags--none">No suspicious lexical patterns detected.</div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <div class="disclaimer">
+    The First DEMO version of this tool.
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('scanForm');
+  const scanLine = document.getElementById('scanLine');
+  const inputWrap = document.getElementById('inputWrap');
+  const btn = document.getElementById('scanBtn');
+
+  form.addEventListener('submit', () => {
+    inputWrap.classList.add('scanning');
+    btn.textContent = 'Scanning…';
+    btn.disabled = true;
+    // form submits normally (progressive enhancement only)
+  });
+</script>
+
+</body>
+</html>
